@@ -1,0 +1,86 @@
+<html>
+  <head>
+    <script src="build/react.js"></script>
+    <script src="build/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+  </head>
+
+  <body>
+    <div id="area"></div>
+    <script type="text/babel">
+
+      //HELLO COMPONENT
+      var HelloWorld = React.createClass({
+
+        propTypes: {
+          name: React.PropTypes.string.isRequired
+        },
+
+        getDefaultProps: function (){
+          return {
+            name: 'Sam'
+          }
+        },
+
+        getInitialState: function(){
+          return {
+            value: 1
+          }
+        },
+
+        componentDidMount: function(){
+        },
+
+        _addByOne: function(){
+          console.log('click')
+          this.setState({
+            value: this.state.value + 1
+          })
+        },
+
+        render: function(){
+          var greeting = "World";
+
+          if (this.props.isPerson) {
+            greeting = (<Person name={this.props.name}/>)
+          }
+
+          return (
+            <div>
+              <h1>Hello {greeting}</h1>
+              {this.state.value}
+              <button onClick={this._addByOne}>Click Me</button>
+            </div>
+          )
+        }
+      });
+
+      //PERSON COMPONENT
+      var Person = React.createClass({
+
+        propTypes: {
+          name: React.PropTypes.string,
+          isPerson: React.PropTypes.bool
+        },
+
+        getDefaultProps: function (){
+          return {
+            name: 'Sam'
+          }
+        },
+
+        render: function(){
+          return (
+            <span>{this.props.name}</span>
+          )
+        }
+      });      
+
+
+      ReactDOM.render(
+        <HelloWorld name ="Walt" isPerson={false}/>,
+        document.getElementById('area')
+      );
+    </script>
+  </body>
+</html>
